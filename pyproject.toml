@@ -1,0 +1,56 @@
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "zed-dashboard"
+version = "3.17"
+description = "Zed dashboard to manage your server"
+authors = ["DroidZed <41507665+DroidZed@users.noreply.github.com>"]
+license = "GPL-3.0-or-later"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+httpx = { extras = ["http2"], version = "^0.27.0" }
+rich = "^13.7.1"
+motor = "^3.4.0"
+python-decouple-typed = "^3.11.0"
+litestar = {extras = ["structlog"], version = "^2.9.1"}
+litestar-vite = "^0.1.22"
+uvicorn = {extras = ["standard"], version = "^0.30.1"}
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.7.0"
+black = "^24.3.0"
+isort = "^5.13.2"
+pylint = "^3.1.0"
+
+[tool.poetry.group.test.dependencies]
+pytest = "^8.1.1"
+pytest-httpx = "^0.30.0"
+pytest-asyncio = "^0.23.6"
+
+[tool.black]
+line-length = 80
+target-version = ['py311']
+include = '\.pyi?$'
+extend-exclude = '''
+# A regex preceded with ^/ will apply only to files and directories
+# in the root of the project.
+^/src/test.py  # exclude a file named test.py in the root of the project (in addition to the defaults)
+'''
+[tool.isort]
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+line_length = 88
+
+[tool.pytest]
+minversion = 6.0
+testpaths = ["tests"]
+asyncio_mode = "strict"
+addopts = ["--import-mode=importlib", "-ra -q"]
