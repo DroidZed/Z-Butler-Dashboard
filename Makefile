@@ -4,6 +4,9 @@ include .env
 install:
 	poetry install --no-root
 
+install-front:
+	litestar assets install
+
 server:
 	python main.py
 

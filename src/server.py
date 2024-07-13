@@ -48,10 +48,10 @@ plugins: list = [
     StructlogPlugin(),
 ]
 
-jinja_config: TemplateConfig = TemplateConfig(
-    directory=Path("./templates"),
-    engine=JinjaTemplateEngine,
-)
+# jinja_config: TemplateConfig = TemplateConfig(
+#     directory=Path("./templates"),
+#     engine=JinjaTemplateEngine,
+# )
 
 cors_config: CORSConfig = CORSConfig(
     allow_origins=["*"],
@@ -72,7 +72,7 @@ app: Litestar = Litestar(
     debug=Env.DEV,
     plugins=plugins,
     route_handlers=routers,
-    template_config=jinja_config,
+    # template_config=jinja_config,
     exception_handlers={HTTPException: app_exception_handler},
     cors_config=cors_config,
     csrf_config=csrf_config,
