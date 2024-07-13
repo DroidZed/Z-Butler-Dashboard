@@ -5,7 +5,13 @@ install:
 	poetry install --no-root
 
 server:
-	py main.py
+	python main.py
+
+front:
+	litestar assets serve
+
+buildFront:
+	litestar assets build
 
 module:
 	mkdir .\src\modules\${MODULE_NAME}

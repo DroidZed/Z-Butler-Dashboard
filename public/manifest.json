@@ -1,0 +1,18 @@
+{
+  "_vendor-DvRGPY7j.js": {
+    "file": "assets/vendor-DvRGPY7j.js",
+    "name": "vendor"
+  },
+  "resources/main.tsx": {
+    "file": "assets/main-BZBN_-23.js",
+    "name": "main",
+    "src": "resources/main.tsx",
+    "isEntry": true,
+    "imports": [
+      "_vendor-DvRGPY7j.js"
+    ],
+    "css": [
+      "assets/main-v3fnQzQ_.css"
+    ]
+  }
+}

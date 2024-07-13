@@ -18,7 +18,7 @@ def router_handler_exception_handler(
 
 
 mainController: Router = Router(
-    path="/v1",
+    path="/",
     route_handlers=[MainController],
     exception_handlers={ValidationException: router_handler_exception_handler},
 )

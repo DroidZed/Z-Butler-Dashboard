@@ -11,3 +11,5 @@ class Env:
     DB_NAME = config("DB_NAME")
     CSRF_KEY = config("CSRF_KEY")
     PORT = config("PORT", cast=int)
+    DEV = config("DEV", cast=bool)
+    HOST = config("HOST")
