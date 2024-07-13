@@ -1,4 +1,20 @@
 {
+  "resources/assets/favicon.png": [
+    "/static/assets/MainLayout-x8ZXAsW1.js",
+    "/static/assets/favicon-DgzGEkrE.png"
+  ],
+  "resources/layouts/MainLayout.tsx": [
+    "/static/assets/MainLayout-x8ZXAsW1.js",
+    "/static/assets/favicon-DgzGEkrE.png"
+  ],
   "resources/main.tsx": [],
+  "resources/routeTree.gen.ts": [],
+  "resources/routes/__root.tsx": [],
+  "resources/routes/about.lazy.tsx": [
+    "/static/assets/about.lazy-BFH7YIKU.js"
+  ],
+  "resources/routes/index.lazy.tsx": [
+    "/static/assets/index.lazy-B-mG5-2t.js"
+  ],
   "resources/styles.css": []
 }

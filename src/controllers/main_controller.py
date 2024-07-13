@@ -1,6 +1,8 @@
 from litestar import Controller, get, MediaType
 from litestar.response import Template
 
+import aiofiles
+
 
 class MainController(Controller):
     path = "/"

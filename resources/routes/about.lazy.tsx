@@ -1,3 +1,4 @@
+import MainLayout from '@/layouts/MainLayout';
 import { createLazyFileRoute } from '@tanstack/react-router';
 
 export const Route = createLazyFileRoute('/about')({
@@ -5,5 +6,13 @@ export const Route = createLazyFileRoute('/about')({
 });
 
 function About() {
-  return <div className="p-2">Hello from About!</div>;
+  return (
+    <MainLayout
+      title="About"
+      description="About page"
+      keywords="about, z butler"
+    >
+      <div className="p-2">Hello from About!</div>
+    </MainLayout>
+  );
 }

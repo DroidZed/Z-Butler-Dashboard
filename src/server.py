@@ -42,16 +42,12 @@ plugins: list = [
         config=ViteConfig(
             template_dir="./templates/",
             use_server_lifespan=True,
-            dev_mode=Env().DEV,
+            dev_mode=True,
+            is_react=True,
         )
     ),
     StructlogPlugin(),
 ]
-
-# jinja_config: TemplateConfig = TemplateConfig(
-#     directory=Path("./templates"),
-#     engine=JinjaTemplateEngine,
-# )
 
 cors_config: CORSConfig = CORSConfig(
     allow_origins=["*"],
@@ -69,14 +65,12 @@ csrf_config: CSRFConfig = CSRFConfig(secret=Env.CSRF_KEY)
 routers: list[Router] = [mainController]
 
 app: Litestar = Litestar(
-    debug=Env.DEV,
+    debug=True,
     plugins=plugins,
     route_handlers=routers,
-    # template_config=jinja_config,
     exception_handlers={HTTPException: app_exception_handler},
     cors_config=cors_config,
     csrf_config=csrf_config,
     compression_config=compression_config,
     logging_config=logging_middleware_config,
-    middleware=[logging_middleware_config.middleware],
 )

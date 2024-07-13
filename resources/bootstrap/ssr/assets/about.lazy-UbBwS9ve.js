@@ -1,0 +1,1 @@
+import{f as t,j as o}from"./vendor-BysuFcG7.js";import{M as e}from"./MainLayout-B7ry4EB3.js";const i=t("/about")({component:r});function r(){return o.jsx(e,{title:"About",description:"About page",keywords:"about, z butler",children:o.jsx("div",{className:"p-2",children:"Hello from About!"})})}export{i as Route};

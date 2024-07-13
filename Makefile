@@ -8,12 +8,9 @@ install-front:
 	litestar assets install
 
 server:
-	python main.py
+	litestar run
 
-front:
-	litestar assets serve
-
-buildFront:
+build-front:
 	litestar assets build
 
 module:

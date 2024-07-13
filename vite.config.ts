@@ -5,7 +5,7 @@ import viteReact from '@vitejs/plugin-react';
 import { TanStackRouterVite } from '@tanstack/router-plugin/vite';
 import path from 'node:path';
 
-const ASSET_URL = process.env.ASSET_URL || '/static/';
+const ASSET_URL = process.env.ASSET_URL || '/';
 const VITE_PORT = process.env.VITE_PORT || '5173';
 const VITE_HOST = process.env.VITE_HOST || 'localhost';
 

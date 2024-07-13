@@ -17,9 +17,9 @@ httpx = { extras = ["http2"], version = "^0.27.0" }
 rich = "^13.7.1"
 motor = "^3.4.0"
 python-decouple-typed = "^3.11.0"
-litestar = {extras = ["structlog"], version = "^2.9.1"}
+litestar = {extras = ["standard", "structlog"], version = "^2.9.1"}
 litestar-vite = "^0.1.22"
-uvicorn = {extras = ["standard"], version = "^0.30.1"}
+aiofiles = "^24.1.0"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.7.0"

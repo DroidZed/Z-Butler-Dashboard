@@ -1,18 +1,56 @@
 {
-  "_vendor-DvRGPY7j.js": {
-    "file": "assets/vendor-DvRGPY7j.js",
+  "_MainLayout-B7ry4EB3.js": {
+    "file": "assets/MainLayout-B7ry4EB3.js",
+    "name": "MainLayout",
+    "imports": [
+      "_vendor-BysuFcG7.js"
+    ],
+    "assets": [
+      "assets/favicon-DgzGEkrE.png"
+    ]
+  },
+  "_vendor-BysuFcG7.js": {
+    "file": "assets/vendor-BysuFcG7.js",
     "name": "vendor"
   },
+  "resources/assets/favicon.png": {
+    "file": "assets/favicon-DgzGEkrE.png",
+    "src": "resources/assets/favicon.png"
+  },
   "resources/main.tsx": {
-    "file": "assets/main-BZBN_-23.js",
+    "file": "assets/main-BcaPbNkD.js",
     "name": "main",
     "src": "resources/main.tsx",
     "isEntry": true,
     "imports": [
-      "_vendor-DvRGPY7j.js"
+      "_vendor-BysuFcG7.js"
+    ],
+    "dynamicImports": [
+      "resources/routes/about.lazy.tsx",
+      "resources/routes/index.lazy.tsx"
     ],
     "css": [
-      "assets/main-v3fnQzQ_.css"
+      "assets/main-CYGqacTs.css"
+    ]
+  },
+  "resources/routes/about.lazy.tsx": {
+    "file": "assets/about.lazy-UbBwS9ve.js",
+    "name": "about.lazy",
+    "src": "resources/routes/about.lazy.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-BysuFcG7.js",
+      "_MainLayout-B7ry4EB3.js"
+    ]
+  },
+  "resources/routes/index.lazy.tsx": {
+    "file": "assets/index.lazy-7KsPB8M1.js",
+    "name": "index.lazy",
+    "src": "resources/routes/index.lazy.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_vendor-BysuFcG7.js",
+      "_MainLayout-B7ry4EB3.js"
     ]
   }
 }

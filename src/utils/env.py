@@ -10,6 +10,6 @@ class Env:
     MDB_SRV = config("MDB_SRV")
     DB_NAME = config("DB_NAME")
     CSRF_KEY = config("CSRF_KEY")
-    PORT = config("PORT", cast=int)
     DEV = config("DEV", cast=bool)
-    HOST = config("HOST")
+    LITESTAR_PORT = config("LITESTAR_PORT", cast=int)
+    LITESTAR_HOST = config("LITESTAR_HOST")
