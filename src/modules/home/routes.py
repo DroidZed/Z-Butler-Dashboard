@@ -1,24 +1,23 @@
 from litestar import Router
-from pathlib import Path
 from litestar import Request, Response
 
-from litestar.status_codes import HTTP_500_INTERNAL_SERVER_ERROR
 from litestar.exceptions import ValidationException
 
-from ..controllers import MainController
+from .controller import HomeController
 
 
 def router_handler_exception_handler(
     request: Request, exc: ValidationException
 ) -> Response:
+    request.logger.error(1, f"{exc.msg=}")
     return Response(
         content={"error": "validation error", "path": request.url.path},
         status_code=400,
     )
 
 
-mainController: Router = Router(
+home_router: Router = Router(
     path="/",
-    route_handlers=[MainController],
+    route_handlers=[HomeController],
     exception_handlers={ValidationException: router_handler_exception_handler},
 )

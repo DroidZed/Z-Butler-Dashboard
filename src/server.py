@@ -1,28 +1,25 @@
-from pathlib import Path
-
 from litestar import Litestar, Request, Response, Router
 from litestar.config.cors import CORSConfig
-from litestar.contrib.jinja import JinjaTemplateEngine
 from litestar.exceptions import HTTPException
-from litestar.status_codes import HTTP_500_INTERNAL_SERVER_ERROR
-from litestar.template.config import TemplateConfig
 from litestar_vite import ViteConfig, VitePlugin
 from litestar.config.csrf import CSRFConfig
+from litestar.logging import LoggingConfig
 from litestar.config.compression import CompressionConfig
 from litestar.middleware.logging import LoggingMiddlewareConfig
 from litestar.plugins.structlog import StructlogPlugin
 
-from src.utils.env import Env
-
-from .routes import mainController
+from .config import Env
+from .modules.home import home_router
 
 logging_middleware_config: LoggingMiddlewareConfig = LoggingMiddlewareConfig(
-    request_headers_to_obfuscate={"Authorization"},
-    request_cookies_to_obfuscate={"csrftoken"},
-    response_cookies_to_obfuscate={"csrftoken"},
-    response_headers_to_obfuscate={"x-csrftoken"},
-    logger_name="[Z Dashboard]",
+    # request_headers_to_obfuscate={"Authorization"},
+    # request_cookies_to_obfuscate={"csrftoken"},
+    # response_cookies_to_obfuscate={"csrftoken"},
+    # response_headers_to_obfuscate={"x-csrftoken"},
+    logger_name="z_dashboard",
 )
+
+logging_cfg = LoggingConfig()
 
 
 def app_exception_handler(request: Request, exc: HTTPException) -> Response:
@@ -37,13 +34,28 @@ def app_exception_handler(request: Request, exc: HTTPException) -> Response:
     )
 
 
+"""
+Default port to use for Vite server.
+    run_command: list[str] = field(default_factory=lambda: ["npm", "run", "dev"])
+    Default command to use for running Vite.
+    build_watch_command: list[str] = field(default_factory=lambda: ["npm", "run", "watch"])
+    Default command to use for dev building with Vite.
+    build_command: list[str] = field(default_factory=lambda: ["npm", "run", "build"])
+    Default command to use for building with Vite.
+    install_command: list[str] = field(default_factory=lambda: ["npm", "install"])
+"""
+
 plugins: list = [
     VitePlugin(
         config=ViteConfig(
             template_dir="./templates/",
             use_server_lifespan=True,
-            dev_mode=True,
+            dev_mode=Env.DEV,
             is_react=True,
+            run_command=["bun", "dev"],
+            build_watch_command=["bun", "watch"],
+            build_command=["bun", "build"],
+            install_command=["bun", "i"],
         )
     ),
     StructlogPlugin(),
@@ -62,7 +74,7 @@ compression_config: CompressionConfig = CompressionConfig(
 
 csrf_config: CSRFConfig = CSRFConfig(secret=Env.CSRF_KEY)
 
-routers: list[Router] = [mainController]
+routers: list[Router] = [home_router]
 
 app: Litestar = Litestar(
     debug=True,
@@ -72,5 +84,6 @@ app: Litestar = Litestar(
     cors_config=cors_config,
     csrf_config=csrf_config,
     compression_config=compression_config,
-    logging_config=logging_middleware_config,
+    logging_config=logging_cfg,
+    middleware=[logging_middleware_config.middleware],
 )

@@ -1,36 +1,28 @@
-#IMAGE_TAG=latest
 include .env
 
-install:
+deps:
 	poetry install --no-root
 
 install-front:
 	litestar assets install
 
-server:
+dev:
 	litestar run
 
 build-front:
 	litestar assets build
 
 module:
-	mkdir .\src\modules\${MODULE_NAME}
+	mkdir ./src/modules/${MODULE_NAME}
 
-	echo from .${MODULE_NAME}_api import * > ./src/modules/${MODULE_NAME}/__init__.py
-	echo print('hi') > ./src/modules/${MODULE_NAME}/${MODULE_NAME}_api.py
-	echo print('hi') > ./src/tests/test_${MODULE_NAME}_api.py
-	echo from .${MODULE_NAME} import * >> ./src/modules/__init__.py
-
-# Note: these ^^^ lines only work on windows !
+	touch ./src/modules/${MODULE_NAME}/service.py
+	touch ./src/modules/${MODULE_NAME}/routes.py
+	touch ./src/modules/${MODULE_NAME}/controller.py
+	touch ./src/modules/${MODULE_NAME}/test_${MODULE_NAME}.py
+	echo "from .${MODULE_NAME} import *" >> ./src/modules/__init__.py
 
 test:
 	py -m pytest -vs .
 
 build:
-	docker build -t droidzed/z-butler:$(IMAGE_TAG) .
-
-compose:
-	docker compose up -d
-
-decompose:
-	docker compose down
+	docker build -t droidzed/z-butler-dashboard:$(IMAGE_TAG) .

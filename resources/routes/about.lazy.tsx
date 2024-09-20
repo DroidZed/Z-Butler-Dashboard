@@ -13,6 +13,8 @@ function About() {
       keywords="about, z butler"
     >
       <div className="p-2">Hello from About!</div>
+
+      <p>idk if this will work or not lol</p>
     </MainLayout>
   );
 }

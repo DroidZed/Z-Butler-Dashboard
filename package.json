@@ -30,5 +30,8 @@
     "@vitejs/plugin-react": "^4.3.1",
     "@tanstack/router-plugin": "^1.44.3",
     "@tanstack/router-devtools": "^1.44.4"
-  }
+  },
+  "trustedDependencies": [
+    "@biomejs/biome"
+  ]
 }

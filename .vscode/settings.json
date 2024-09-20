@@ -1,6 +1,10 @@
 {
   "python.analysis.autoImportCompletions": true,
   "cSpell.words": [
-    "Structlog"
-  ]
+    "litestar",
+    "structlog",
+    "Structlog",
+    "tanstack"
+  ],
+  "python.analysis.typeCheckingMode": "basic"
 }

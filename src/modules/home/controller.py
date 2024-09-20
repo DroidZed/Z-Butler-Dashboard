@@ -1,10 +1,8 @@
 from litestar import Controller, get, MediaType
 from litestar.response import Template
 
-import aiofiles
 
-
-class MainController(Controller):
+class HomeController(Controller):
     path = "/"
 
     opt = {"exclude_from_auth": True}

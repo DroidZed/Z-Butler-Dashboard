@@ -1,6 +1,6 @@
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
-import favicon from '@/assets/favicon.png';
+import favicon from '@/assets/favicon.ico';
 import { Link } from '@tanstack/react-router';
 
 interface MainLayoutProps {
@@ -32,7 +32,7 @@ const MainLayout = ({
       <div className="p-2 flex gap-2">
         <Link to="/" className="[&.active]:font-bold">
           Home
-        </Link>{' '}
+        </Link>
         <Link to="/about" className="[&.active]:font-bold">
           About
         </Link>
