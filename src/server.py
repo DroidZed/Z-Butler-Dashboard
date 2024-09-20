@@ -3,23 +3,22 @@ from litestar.config.cors import CORSConfig
 from litestar.exceptions import HTTPException
 from litestar_vite import ViteConfig, VitePlugin
 from litestar.config.csrf import CSRFConfig
-from litestar.logging import LoggingConfig
 from litestar.config.compression import CompressionConfig
 from litestar.middleware.logging import LoggingMiddlewareConfig
 from litestar.plugins.structlog import StructlogPlugin
+from litestar.logging.config import StructLoggingConfig
+from litestar.plugins.structlog import StructlogConfig
 
 from .config import Env
 from .modules.home import home_router
 
 logging_middleware_config: LoggingMiddlewareConfig = LoggingMiddlewareConfig(
-    # request_headers_to_obfuscate={"Authorization"},
-    # request_cookies_to_obfuscate={"csrftoken"},
-    # response_cookies_to_obfuscate={"csrftoken"},
-    # response_headers_to_obfuscate={"x-csrftoken"},
+    request_headers_to_obfuscate={"Authorization"},
+    request_cookies_to_obfuscate={"csrftoken"},
+    response_cookies_to_obfuscate={"csrftoken"},
+    response_headers_to_obfuscate={"x-csrftoken"},
     logger_name="z_dashboard",
 )
-
-logging_cfg = LoggingConfig()
 
 
 def app_exception_handler(request: Request, exc: HTTPException) -> Response:
@@ -34,16 +33,12 @@ def app_exception_handler(request: Request, exc: HTTPException) -> Response:
     )
 
 
-"""
-Default port to use for Vite server.
-    run_command: list[str] = field(default_factory=lambda: ["npm", "run", "dev"])
-    Default command to use for running Vite.
-    build_watch_command: list[str] = field(default_factory=lambda: ["npm", "run", "watch"])
-    Default command to use for dev building with Vite.
-    build_command: list[str] = field(default_factory=lambda: ["npm", "run", "build"])
-    Default command to use for building with Vite.
-    install_command: list[str] = field(default_factory=lambda: ["npm", "install"])
-"""
+struct_log_cfg = StructlogConfig(
+    structlog_logging_config=StructLoggingConfig(
+        log_exceptions="always",
+    ),
+    middleware_logging_config=logging_middleware_config,
+)
 
 plugins: list = [
     VitePlugin(
@@ -58,7 +53,7 @@ plugins: list = [
             install_command=["bun", "i"],
         )
     ),
-    StructlogPlugin(),
+    StructlogPlugin(struct_log_cfg),
 ]
 
 cors_config: CORSConfig = CORSConfig(
@@ -84,6 +79,4 @@ app: Litestar = Litestar(
     cors_config=cors_config,
     csrf_config=csrf_config,
     compression_config=compression_config,
-    logging_config=logging_cfg,
-    middleware=[logging_middleware_config.middleware],
 )
